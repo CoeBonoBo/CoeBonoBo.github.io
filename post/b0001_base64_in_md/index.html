@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在Markdown中使用base64存图片 - 人工智障和神经病网络</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="CKboss" /><meta name="description" content="在Markdown中使用base64存图片 使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失." /><meta name="keywords" content="Code, Program, UE5" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.97.2 with theme even" />
+
+
+<link rel="canonical" href="http://coebonobo.github.io/post/b0001_base64_in_md/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.4747d1be8010357c5daf4cd103b0bc1cff65936180045419874ea97f32138102.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="在Markdown中使用base64存图片" />
+<meta property="og:description" content="在Markdown中使用base64存图片 使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://coebonobo.github.io/post/b0001_base64_in_md/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-04-19T00:00:00+00:00" />
+
+<meta itemprop="name" content="在Markdown中使用base64存图片">
+<meta itemprop="description" content="在Markdown中使用base64存图片 使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失."><meta itemprop="datePublished" content="2022-04-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-04-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1024">
+<meta itemprop="keywords" content="常规操作," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在Markdown中使用base64存图片"/>
+<meta name="twitter:description" content="在Markdown中使用base64存图片 使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">人工智障与神经病网络</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">人工智障与神经病网络</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在Markdown中使用base64存图片</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-19 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+            </div>
+          <span class="more-meta"> 1024 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#在markdown中使用base64存图片">在Markdown中使用base64存图片</a>
+      <ul>
+        <li><a href="#什么是data-url">什么是Data URL</a></li>
+        <li><a href="#图片转base64">图片转base64</a></li>
+        <li><a href="#在markdown中使用">在Markdown中使用</a></li>
+        <li><a href="#一个使用base64展示图片的例子">一个使用base64展示图片的例子</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="在markdown中使用base64存图片">在Markdown中使用base64存图片</h1>
+<p>使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失.</p>
+<p>如果可以把图片以base64的方式存在markdown文件中, 就可以省去寻找可靠图床的麻烦.</p>
+<p>本文会介绍一个可行的在markdown中使用base64存储图片的方案</p>
+<h2 id="什么是data-url">什么是Data URL</h2>
+<p>简单来说, 就是先把图片或附件转成base64, 再利用类似 <code>data:[&lt;mediatype&gt;][;base64],&lt;datat&gt; </code>  的形式在html中展示.</p>
+<p>DataURL可以方便的将附件以纯文本的形式在网页上保存, 这正是我们想要的.</p>
+<p>但需注意, DataURL的缺点也很明显, base64编码后文件体积会大上30%, base64格式的图片在浏览器上加载缓慢, base64过长的编码会让html文件难以编辑等.</p>
+<h2 id="图片转base64">图片转base64</h2>
+<p>有很多在线的工具都可以进行图片到base64的转换.</p>
+<p>为了离线方便, 还可以使用如下的python代码将图片转成data_url的形式:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span><span class="p">,</span> <span class="n">messagebox</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyperclip</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">cv2</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tempfile</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pathlib2</span> <span class="kn">import</span> <span class="n">Path</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ImageBase64Optim</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># base64 前缀</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@classmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">get_img_base64_prefix</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">img_type</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img_type_map</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;jpg&#39;</span><span class="p">:</span> <span class="s1">&#39;data:image/jpeg;base64,&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;jpeg&#39;</span><span class="p">:</span> <span class="s1">&#39;data:image/jpeg;base64,&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;png&#39;</span><span class="p">:</span> <span class="s1">&#39;data:image/png;base64,&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">img_type_map</span><span class="p">[</span><span class="n">img_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 短边1080</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@classmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">shot_edge_resize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">short_edge</span><span class="o">=</span><span class="mi">720</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">h</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">short_edge</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">img</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="n">h</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">w2</span> <span class="o">=</span> <span class="n">short_edge</span>
+</span></span><span class="line"><span class="cl">            <span class="n">h2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">short_edge</span> <span class="o">*</span> <span class="n">h</span> <span class="o">/</span> <span class="n">w</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">w2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">short_edge</span> <span class="o">*</span> <span class="n">w</span> <span class="o">/</span> <span class="n">h</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">h2</span> <span class="o">=</span> <span class="n">short_edge</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,(</span><span class="n">w2</span><span class="p">,</span><span class="n">h2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">img</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 低质量的jpg</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@classmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">trans_to_low_quality_img</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">tmpimg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">img</span> <span class="o">=</span> <span class="n">ImageBase64Optim</span><span class="o">.</span><span class="n">shot_edge_resize</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">tmpimg</span><span class="p">,</span><span class="n">img</span><span class="p">,[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@classmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">base64_img</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">img_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        拿到图片的base64编码结果
+</span></span></span><span class="line"><span class="cl"><span class="s2">        :param img_path 图片路径
+</span></span></span><span class="line"><span class="cl"><span class="s2">        :rtype: str
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a+&#39;</span><span class="p">,</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmpimg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tname</span> <span class="o">=</span> <span class="n">tmpimg</span><span class="o">.</span><span class="n">name</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ImageBase64Optim</span><span class="o">.</span><span class="n">trans_to_low_quality_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="n">tname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tname</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">compress_img_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 对图片内容编码</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ret_str</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_img_base64_prefix</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">tname</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">compress_img_content</span><span class="p">),</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpimg</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ret_str</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">img_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># img_path = Path(&#39;./Microsoft_Nostalgic_Windows_Wallpaper_4k.jpg&#39;)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">ImageBase64Optim</span><span class="o">.</span><span class="n">base64_img</span><span class="p">(</span><span class="n">img_path</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ret</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_gui</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">window</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img_file_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&#34;base64 already copy.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_cli</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img_file_path</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span>  <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">run_gui</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了让base64编码后的图片体积不过于庞大.</p>
+<p>在此代码中, 对于过大的输入图片会将其缩放到短边1080像素, 同时还在进行jpeg编码的过程中降低了原有图像质量.</p>
+<p>具体来说, 对于输入的4k大小的图片编码后的base64大小可以控制在300k左右, 图像质量会有些许损失, 不过对于个人blog来说, 还是足够使用的.</p>
+<h2 id="在markdown中使用">在Markdown中使用</h2>
+<p>可以在markdown文件的最后一部分, 以 <code>[p1]: data ......</code>  的形式贴上转码后的图片base64</p>
+<p>在markdown文件的正文中, 以 <code>![][p1]</code> 的形式使用图片.</p>
+<p>很多静态网站的主题, 是可以自动忽略掉data内容的, 所以不用担心文章最后有大量的base64编码看起来像乱码.</p>
+<h2 id="一个使用base64展示图片的例子">一个使用base64展示图片的例子</h2>
+<p>可以打开源码以供参考</p>
+<p><img src="data:image/jpeg;base64,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" alt=""></p>
+<hr>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">CKboss</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-04-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/">常规操作</a>
+          </div>
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'jiangoil';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="http://coebonobo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>JiangOil</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

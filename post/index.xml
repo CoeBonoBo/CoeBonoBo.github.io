@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 人工智障和神经病网络</title>
+    <link>http://coebonobo.github.io/post/</link>
+    <description>Recent content in Posts on 人工智障和神经病网络</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 19 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Markdown中使用base64存图片</title>
+      <link>http://coebonobo.github.io/post/b0001_base64_in_md/</link>
+      <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://coebonobo.github.io/post/b0001_base64_in_md/</guid>
+      <description>在Markdown中使用base64存图片 使用markdown最大的痛点之一就是上传图片时需要额外的图床, 而图床又很容意出问题导致图片丢失.</description>
+    </item>
+    
+  </channel>
+</rss>
