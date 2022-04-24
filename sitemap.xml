@@ -8,29 +8,57 @@
   </url>
   
   <url>
+    <loc>http://coebonobo.github.io/categories/acm/</loc>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://coebonobo.github.io/categories/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/tags/hdoj/</loc>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/post/b0002_hdoj6703/</loc>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://coebonobo.github.io/post/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://coebonobo.github.io/tags/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://coebonobo.github.io/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/</loc>
+    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

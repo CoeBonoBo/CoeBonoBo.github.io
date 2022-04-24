@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HDOJ on 人工智障和神经病网络</title>
+    <link>http://coebonobo.github.io/tags/hdoj/</link>
+    <description>Recent content in HDOJ on 人工智障和神经病网络</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/tags/hdoj/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HDOJ 6703 Array</title>
+      <link>http://coebonobo.github.io/post/b0002_hdoj6703/</link>
+      <pubDate>Sun, 24 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://coebonobo.github.io/post/b0002_hdoj6703/</guid>
+      <description>HDOJ 6703 Array 题目 题目链接 array *Time Limit: 4000/2000 MS (Java/Others) Memory Limit: 262144/262144 K (Java/Others) Total Submission(s): 3577 Accepted Submission(s): 1323 * Problem Description You are given an array a1,a2,&amp;hellip;,an(∀i∈[1,n],1≤ai≤n). Initially,</description>
+    </item>
+    
+  </channel>
+</rss>
