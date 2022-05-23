@@ -6,7 +6,7 @@
     <description>Recent content on 人工智障和神经病网络</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>http://coebonobo.github.io/about/</link>
@@ -14,6 +14,15 @@
       
       <guid>http://coebonobo.github.io/about/</guid>
       <description>人工智障与神经病网络</description>
+    </item>
+    
+    <item>
+      <title>如何用matlab求隐式函数的导数</title>
+      <link>http://coebonobo.github.io/post/b0003_%E9%9A%90%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/</link>
+      <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://coebonobo.github.io/post/b0003_%E9%9A%90%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/</guid>
+      <description>如何用matlab求隐式函数的导数 隐函数求导的例子 假设有一个圆 $x^2+y^2=5$ , 要求在某个点上的切线的斜率. 我们可以把式$x^2+y^2=5$中的每一项对</description>
     </item>
     
     <item>

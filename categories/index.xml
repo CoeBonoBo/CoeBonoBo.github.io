@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 人工智障和神经病网络</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://coebonobo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Math</title>
+      <link>http://coebonobo.github.io/categories/math/</link>
+      <pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://coebonobo.github.io/categories/math/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>ACM</title>
       <link>http://coebonobo.github.io/categories/acm/</link>

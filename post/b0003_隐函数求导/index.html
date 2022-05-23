@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何用matlab求隐式函数的导数 - 人工智障和神经病网络</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="JiangOil" /><meta name="description" content="如何用matlab求隐式函数的导数 隐函数求导的例子 假设有一个圆 $x^2&#43;y^2=5$ , 要求在某个点上的切线的斜率. 我们可以把式$x^2&#43;y^2=5$中的每一项对" /><meta name="keywords" content="Code, Program, UE5" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.97.3 with theme even" />
+
+
+<link rel="canonical" href="http://coebonobo.github.io/post/b0003_%E9%9A%90%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.6330d070b1376772df42a508abc2f657b1ee6f7ca5d0e85fdff4a3402c5e0106.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="如何用matlab求隐式函数的导数" />
+<meta property="og:description" content="如何用matlab求隐式函数的导数 隐函数求导的例子 假设有一个圆 $x^2&#43;y^2=5$ , 要求在某个点上的切线的斜率. 我们可以把式$x^2&#43;y^2=5$中的每一项对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://coebonobo.github.io/post/b0003_%E9%9A%90%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-23T00:00:00+00:00" />
+
+<meta itemprop="name" content="如何用matlab求隐式函数的导数">
+<meta itemprop="description" content="如何用matlab求隐式函数的导数 隐函数求导的例子 假设有一个圆 $x^2&#43;y^2=5$ , 要求在某个点上的切线的斜率. 我们可以把式$x^2&#43;y^2=5$中的每一项对"><meta itemprop="datePublished" content="2022-05-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-05-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="757">
+<meta itemprop="keywords" content="matlab,math," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何用matlab求隐式函数的导数"/>
+<meta name="twitter:description" content="如何用matlab求隐式函数的导数 隐函数求导的例子 假设有一个圆 $x^2&#43;y^2=5$ , 要求在某个点上的切线的斜率. 我们可以把式$x^2&#43;y^2=5$中的每一项对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">人工智障与神经病网络</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">人工智障与神经病网络</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何用matlab求隐式函数的导数</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-23 </span>
+        <div class="post-category">
+            <a href="/categories/math/"> Math </a>
+            </div>
+          <span class="more-meta"> 757 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何用matlab求隐式函数的导数">如何用matlab求隐式函数的导数</a></li>
+    <li><a href="#隐函数求导的例子">隐函数求导的例子</a></li>
+    <li><a href="#如何用matlab求隐式函数的一阶导数">如何用matlab求隐式函数的一阶导数</a>
+      <ul>
+        <li><a href="#方法1-用二元隐函数存在的定理">方法1: 用二元隐函数存在的定理</a></li>
+        <li><a href="#方法2-用solve硬解">方法2: 用solve硬解</a></li>
+      </ul>
+    </li>
+    <li><a href="#如何用matlab求隐式函数的二阶导数">如何用matlab求隐式函数的二阶导数</a>
+      <ul>
+        <li><a href="#方法1-链式法则">方法1: 链式法则</a></li>
+        <li><a href="#方法2-用solve硬解-1">方法2: 用solve硬解</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="如何用matlab求隐式函数的导数">如何用matlab求隐式函数的导数</h1>
+<h1 id="隐函数求导的例子">隐函数求导的例子</h1>
+<p>假设有一个圆 $x^2+y^2=5$ , 要求在某个点上的切线的斜率.</p>
+<p>我们可以把式$x^2+y^2=5$中的每一项对$x$求导, 可以得到:</p>
+<p>$$\begin{equation} \frac{d(x^2)}{dx} + \frac{d(y^2)}{dy}\frac{dy}{dx} = \frac{d(5)}{dx} \tag{1}  \end{equation} $$</p>
+<p>$$ \begin{equation} 2x+2y\frac{dy}{dx} = 0 \tag{2} \end{equation}  $$</p>
+<p>再将 $\frac{dy}{dx}$ 看成一个变量, 可以对式$(2)$求解得到: $ \frac{dy}{dx}= - \frac{x}{y}$ , 这就一阶导, 也是圆上每一个点上切线的斜率.</p>
+<p>对式$(2)$再次求导:</p>
+<p>$$ \begin{equation} \frac{d}{dx}(2x) + \frac{d}{dx}(2y \frac{dy}{dx} ) = 0 \tag{3} \end{equation} $$</p>
+<p>求$\frac{d}{dx}(2y \frac{dy}{dx} )$ 这一项要用乘法法则, 注意$(\frac{dx}{dy})^2$和$\frac{d^2y}{dx^2}$是不同的.</p>
+<p>$$ \begin{equation} 2 + 2 \times ( \frac{dx}{dy} )^2 + \frac{d^2y}{dx^2} = 0 \tag{4} \end{equation} $$</p>
+<p>将$ \frac{dy}{dx}= - \frac{x}{y}$ 代入式$(4)$ , 将 $\frac{d^2y}{dx^2}$ 看做变量可以求解得到: $ \frac{d^2y}{dx^2} = - \frac{y^2+x^2}{y^3}$ 这个就是二阶导.</p>
+<h1 id="如何用matlab求隐式函数的一阶导数">如何用matlab求隐式函数的一阶导数</h1>
+<h2 id="方法1-用二元隐函数存在的定理">方法1: 用二元隐函数存在的定理</h2>
+<p><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCAF3AfQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0WiiiuEsKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKYZEXcGdRtGTk9B70iSxuqssiMrfdIYEH6etAElFB4qAXlqSALmEk8YDjNFhE9FNLKGCkgMegp1AwooooAKKKaGUsQCCR1FADqKKKACimK6OWCsrFTggHOKSWWOJd0kioPViBQBJRVT+0LTyBMbiMRkZDE4qeOVJYlkRgUYAqfUUWYiSiq5uoFnWEyrvZS4Hqo4Jqx1oGFFRiaMzmHcPNC7ivfGcZqSgAoqsb62FmbszKLcdXPAHOP51NJIkUbSSMFRRksTgAUWEPoqo2oWiqzfaIyFdYyQc4ZsYHHc5FWVZWztIOODg0WAdRUP2mD/ntH/32KdHLHLu8uRH2nB2kHBosBJRVZ722R9jTIDgtyeAAQOT9SKfBcRXAkMThgjmNsdmHUUWYE1FFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKQnAJ9KWigDI0cJe6Mk90qsbgtJIGHB5OAR6AADB9KhWwSDTNSaNfKSVmmiReBGQowQOxJGfxq4umR/ZpbOQFrUvvRVdlK5OcZGDgH3/lSHTIo7SW2t9yJP8sjPIztt6EAsT2468Zq7oRLbXm/R4r2YbQYBK49PlyaoaFbSCwhFzbQhXXzyc5Jdm3cjAxjNaE2nW08LwyIxikQIyh2A2joMA/yqzGixxqi5wowMkk/nSuBnaVI1zcahO/31uGhXI+6q4x+ZJP40afcXdxNIkrw4t5Wjk2qcv0Kkc8cEcc96mFivm3I4MF1zImSCGwASMeoFP+wwL5rRoFeVNjEEjIAwOh/lzQAanLNb6dcTW5QSxoXXeuRwM+tLayyTFpCV8llUoAOQcZP16imPby+RFaptaAoUlZ2O7GMDHqevU/nTnsozbwwRkxxxFdoViOB06H+efpQAy/F42xbO4ihPOd8Rcn9Rge/NV753ttQ0t85eZzBIRxuG0kfkR+pqzc6ZbXdws0yyF1AA2ysoxnOCAQD+NPe186+imkxtgB8tR/eIwSfoMgfU0XAZdXZgkCiW2TIziV9p/KkknkfS55o2jaQRuVMTbhkA4wfrV6ilcDndP/d3WieUSRLZsZT/AHgApBPqck/mauamVXWNOLHACTYO3d2WrsNnBbsWij2nGAck4HXA54Gew4pGgZr/AO0kA+XGUjGe5IJP6AVVwMCzvrjNzfskUjmKBW3Ajksw49OCDV3V2ZnsIJY0llaTc5X5RtUFsZ5IBIAx3wasz6fI+nzRqymeaRZHY9MhgcfgBgfSrF7Zi8MOXZBG5Y7eCcqRjP40XA5rKXDPm1Ty5/IG1UU7UcElRkjH4dSTWtE0l3oiSySeWI3ZnA+QFEY8HGccAZxSJooW3XCxvIskbDzOcIgAC5x6D07mpYtPmGjLYv5aGTcJdh4VWYkgcc8HGfxodgIFmhe7VRFGC1uJlla4YAqTwM4z2zTpY3tNAYrKxdnVy8chbO5xnaTzgjpSPp97b3vn2wt7iMRCJY5iVKqCTjIBz1x06Valgu7vSzFKkMExZSFRiygBgeuB2HpQBlyrGJ7iORpxYwGFihzleuMA9BnBP0qW6L/ZdeRpZJEQBUDtnaDGCcfiTWnFayx3d3OXRjMqBcqcDaD1/Oqa6fdyadqKzmEXV4xICMSq/KFAyR6DJ470XAr4t2nkDMhMMpdwQCrMVBDHPoCAB2xVnR8RXN1bxbRAiq6gKBlmLFiSOpOBRcaQ+9ntTCqlw5hK7Ubhg2SOpO7rjsKsWNncxPvmkVQF2LFGSVCjG3k8kjB/OgDJn1OYWEUg8nMojysQ+dSXAIxzgEE4J6HpmrmkSrHP5EYtzG8RnLw55O7GMnkkDqTzmkh0eZLS2h3RIYnWSTy+BKykEbuPYflVi2sZINVkuRHCkbxEERk5LlsknNF0BhSozayzx3UO1kDmMsoYksACTjG4kZAx2Hc1o6YsyXcFoLpyIkkkmChQC+/HPGcEljU1xpUstyblHEbB1cRDBVmHALEjsOmMYPPNOttPurXUnu45YpBdEfaVYEbcdCh9umD9adwNKCSV/M82HygrkIdwO5ex9vpU1QQJMpk86USbnJTC42r6e/1qes2AUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIJ7mKB40kbDSEhRgnOBk9Kgjv13zeajRpGflcqcMuM56dufyqLWZEtbdLkLmZXVEwcH5iARnHAxz+FVh5s8t/CTczxK6quyRV+UqpIzkHuTmqSEaD6jAtnHdfO0DgMGVCcA9yPxqA6uolMZtpgwdY8HaDlhkcZqPXmSPSmVpyh+UKCRl8Ecc85+lULy3AuEl3+aJbmIgyQksABjk4GQfTFNIDW/tSBbEXU+6JCxXbjc2QSOAuc9Knsry3v7ZZ7SUSxk4yOOR1BB6Gq1kIrLTUMvPlsxU+WVOSxOADz3wPWl0m1FrFOSVE1xK08iqc7S3QfkB+OaVgLnnIZjEGy6jJHpmmC9tiMidMfWs3w1I01nczy8yyXUu7PUYbaB+AArZyPUfnQ9AI4biKfeInDbDhsdjTWmlDEC3kYD+LKgH9afvjZzGHXeBkqDyB61j3auNQaKGecJBavJJiVvvHAXPPXhjRYDWhkld3EkDRKMbSWB3evAPFZy6zlWc2zbFRnJ3A8hioH1Yg4qXTkj8iynkkkaeWIDLSMc5UE8E47elY8UuxFEkREBWRneQDaWDkjbwckDdkY6D6U7AbllfNcP5U0DwzKilweVDEZ2g55I6/TFTvNIjECB2UD7wZQP1NY8eH1CzldEhCSupD8FiVIGOBnORjn9aiuHLXuoZ8weVMHErSbY0/dqCCSeQcngDn1FFgNa2vjcXLRLbyhFXJlOCmfQHPJqO/1RbKdIihO5kG7PGCcH8Rxx3zWNZiSFNOV45UkdoP3yt8jptOFA7YPUd85yc1J4iSI3cLXcWURzJvLhQFUZOPViSAPxxQlqBp2urJcTOHEcUKRK7O0gOGOTt444ABJ96uTXSQoXZXKBdxdRkAVz5hjW8sbMx/PdMlw2/Bb5OWyRx/dHvV7XTM6QRIuLczxrJk4LgsBtHt6n/wCvQ0BYtNRknsFuJLOZWYFggGSRnjk46jB/GrZuUVEMgdCwzgqSR7HFY93Cs2owWzWAEJiaRkG0bmBUDJB6DJ/SrGqy3LWcCKphWWRElO7kKzYKj3wetKwEljq0d1G8jAqpdhHhWJdAcBunerRvYVt45nLIkhCqGUhiT0GOuaz/ACZo9ZgjjkiQLaOqYjOFAZcDGfpVjUysGlvcTfvJLdS6lRglwMDHXBJ4/GiwEi3ym5aMxuIwoZZArYJJIIPHXp+dKt/A9o1zGWkiUkEqpzwSDx+FZ0Us0l2yK1xIhtkk2xyLwxLZ5OPSrd0qW2iOhlaBViIy7AnoeCTwaAGSa1GgZvs85URiXOAMqTgYyasR6gjRzPIjRLFJ5bFiDzgHtnHUVgXduG0z7R5hkBtUQCSIkg5BODgADtW1ZWyrBeI2CssjEjyygAKgEAHqOOtOwGlRWR4WnkuPDlk8pJfYVyTyQCQD+QFa9S0AUUUUhhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAQvAkk8cr/MUztB6Anv8AXFUX0S3Du9vNc2pkOWEEpUE4x0ORWpRTuIgjto0WIMDI0QwryHcwz15NRyWEUm3e8zbWDrmRuCOh61boouBRn0qzuY/LuYjOobeBIxbB9uals7G1sI2S0hSFWO4hR1NWaKLgUoLFYJbgKA0E7mRkI6Mev4HGfrmpvslt/wA8I/8AvkVPRQBAtpBG5eKJI5CMb1UA4pIbSGKN0Vc+YcuW5LnGOT3qxRRdgZ1to1rbSwyIZ2MIIjV5mZUyMcAnHSpBplp5AiaPeoDgFuSN+d3PvmrtFFwKMOmW8UokJlmYABfNkL7QDkYB75AOetObTrZ2nLKx887pF3nDcAdM+gFXKKLgU30+F2hJaT9y4dRvJGQCP60+aziuG3TDzAOivyo/DpVmii4Ga+i2TW/lFGGMFZFYh1I6bSOmOwHFWp7WO4jjSQsRG6uDnklTkZ/KrFFFwKq2ca37Xm+RpCmwBm+VRkE4HvgU+5t0uowkudqurjBxyDkfqKnoouBX+yQBw+w7gpUNuOQCRxnPsKT7HD5cUYXEcbbgg6E5zk/jzVmii4GdNpFvLO88bz28z4DNDIV3Yz1HTvU8FnHFCkUjPPsbcGmO9s+uTVqii4FSaxiuFdZWlZX6r5hA/DmkktT5UqwyuHlG0s7Fto55A9auUUXAhtreO1toreFdscShVHoBU1FFIYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBBcTx2/lmXIDuEBxwCemagl1O3ieRGEhMcixMVQkBmxj+YpmqvNEkLwzbMzRoVKgggsAf0rLvg0dncQgxyTzSpKjKxDSOWG0jrgDaB3wBVJCOikkSJC8jqij+JjgCmLdW7sFSeJmPRQ4JNYviFXXQ0sAzTTXciwAuRk5OW5wOgB5xS3cv2TT57yewjjks222yg5LEqFBzjoS2PwosBu7l3bcjcO1OrDlmudKSxVlSd7qTy5XYkMZGBIPptyMY7DGK1k+0fZvn8v7Rjtnbn+eKTQE1FZWnajNew2MnlxjzUZpgCcoQcDHtkHrTrmbURfLFAlqYiR98tuC9yccD2osBpBgc4IOODUc1xFCjtJIqhAWbJ6AVRtJ/M17UYl+5HHFn03HcT+m2q+qf6VfRWQtwUlDNK5GC+3BCZ988n04700gNCG/t5bSO5aRYkdQ37xgCAfX0q3WJarKb6/AtYm2yRgKXGFGwHjj3P41c1W4ktYIGicJvnRGO3OFJweKGgJItQt3WYtIsYhdkbeQOR1P0qS4uFgtZJypdY0LkLjJAGeMkCseYJaqvkXBdprpS4aIHIZgG7ccZqx4ilC6eLUZBunWHgE4Ukbjx0AGaLAT2+pxzTW8TwywtcR+ZEHA+YAAkcE4ODVlp1FyIF+Z9u5gOijsT9SP51SaK2srpZpDLNMEwHY58tMgE44AGcZwM1HZMYtX1h5cnmN1wDkoE7fiD0osBsUVz1uIY7+d5VnFswW7g3bsBsEMfbPBwfXpWt9uhWMPKWiy4jww5DHscZHce1FgLdFZOtqVawuFDlorlBhMnKnIPA69anhkjtT5JVgztvcjlULk4ySe5pWAv0VVN7AY7ht5xASJAAcg9emMn8KzNLbTYhJcWULb5CEwEYEk5IA3Y57k07Aa09wkDJ5nCO23d2BPTP16VPWRr0guPDd00OSZIwI/UsSAP1xWhNn7DJu+8Izk++KLAMW8ib7SSCqW5IZiMA4AJI9cZp9rcJdWsU6BlWVQ4DjBAPqK5yK0Fx9gjFuqbrJiwBA8wfJkEjpnoT6E1ftPL/tmGRIGhzZbjGRgrlhwR68U7AXv7UszdC3E6Fim/cGG3GcYznrmi11O1unKRyrvDsgXIySvUj2rI1i7W0vY7whwDF5Kph1ZiWBJGB0A55q9pJNvF5ZSR/OleQOqkqATkZJ/KlYC3PfwW93DbyEh5QSD2UDHU9sk4FDajaLIIzMNxk8rGD970rL1CPy/Mlmjlm3tsmRVUiVSCAignIwSD69fWiyWK3dC4YRJdsibudrFQqk+vcfU07AbH2hPtZtufMCCTpxjJH8xUM2oRQXDROr5UIWYLkAMSB+o/lWRqaj+07nZI0swtQyREhgW3HA29x7VViST+11ge3jMlx0MkIAEaOxJI6ZIKgH1I9KEgOuqvaXSXcRkjDBQ7J8wxkqSD+oNZ2oSRR6xAZssn2aQqik5Zty4AA6n0+tZbxmzs4rO5t2Sd5EmWRSSpzKpZc+o3Yx3HNKwHT3NxHa27zykhEGTgZqB9QhR4lZJAZXCL8vc5x/Kq/iCWMaTcxGRA7JwpIyeR0B61TvGiSaxfzY8LcqTjYMDB5JHOKEgN15ooyA8iIT0DMBmqtvqdrPNPGkq/uX2MxYYJwCcHPOM4NNu7kvZGWyVJXZCySEZVRjr/8AWHWsaKb7N4cSSC4CymIOTlCSzYJJGMkkk0WA3zf2otTc+crQhtpdTkDnH86bPqFvDcwQM4aSZiAFIO3AySeeOw/Gmas0kGlXEkLqjRxswygIJA9DWRfK0d8lz5qEvNHGoETZC5ywz0OTycdQBQkBvi5gMMkqyo0cWd7KcgY61DNqVvBZC6lYorIHCNgNg+341SvZg2kTbmZfLcB/LgOH5BCgHqDwCfrWZqJMGnzAyM0rxvLKz5UFsAgAcEc4A4wQOxp2uB1EM0UwYxSLIFOCVOcGq39p22yZt2PKZlAJALleu3PXGcfWooOWuPs1200rKvys2VTgjI/Un6AVgC4NjHppG6QxwTB2LlScknJIB5Ow0JAdXBdwXIHkyK52hioPIB6ZFRpeo8kqJFK5ifY21RgHAPr71maVdibVJiE5aIhm80ucKRjAwOu4/lTWj/065aGSJjKwkKS20hZcgDsRwcenrSsBr212ly8yKrq0LBGDjHOAf5GoBqtr5/lBmZh6LnndtxjrnP6Vm6LLJLN52wJHKrkpHAyqzAgZLEkZwvAFUDbxvrEjiaVGbZEAY3KbySdoPUHGCSf5U7AdRaXSXkPmxqwTcygsMZwSMj2OKs54rn9JhjOoiJC5Wyi2MCxwHLEAkZxnaPyNb7dDSaApf2ra/Yzd5lMAQvuETfdAznpVxGDorL0YAjNcuj/8UYw86f8A49G48okfdPGdvT3zXTW//HvF/uD+VDQElFFFSMKKKKACiiigAooooAKKKKACiiigCpqFnHf23kyglQyuBkgEg5APtVWfRxcSJO9xIl1F/qZI8ARewU5Bz3zmtWimmIzjpnmzWc93cySz2pJUqAqkkYJ24PY+tTanbfa7JosZIZXA9SrBsfjjFW6KLgZ93pkV6H86SY5ZXQ7gDGQQRt445A65pWW4trl5V82dJdqJECMJgHLc+ueevQVfoouBlW+lG1toYLeZ4yJhLI4PLDOSv0ycU46aYrh7lLm7kYvv8kyAIT2HTOB9a06KdwKWn2Qso5Czb55nMkr9NzH09gMAfSnXFoZ7qCcStH5QYfKASd2PXjtVuilcCiNP2tOy3VwrTEF2BXOQAOPl9AKke3d7iNzMTEiEbMcsx43E/Tt71aoouBQWxfy1V7qV8RGNieCx7N7Ec1ahV44USSQyOqgM5GNx9aloouBVubRblgWZlypRsfxKSCR+nb3qVoUaZZcYdRgEdx6GpaKLgRzxLPC8T/dYYOKiitVRTvJkZn3szcZbjnH0A/KrNFK4FdbZVuXn3yMzY+VmJVcDHyjtnvTZbRJbgSFiPullHRipyv5GrVFO4DFjVNxUYLHJ96juIfOVcMUZW3KwAOD/AJNT0UrgVks4lSFMErF90H19TU0qeZE6ZxuUj6Zp9FFwM+100W0ts/nySGCEwgMBgjjn2+6KLexliv57qW585nURxgoF2KCTjjqcnr7VoUU7gZl1pYuYpC8pM77f3jDhQGBIUdhx/iTUiWDQ3vnQXMscLEl7fAKMfUd1/Cr9FFwKV1YJPcwXCO0U8TA71/iXupHcH9KiXSIDcefNmR1maZBkgAnpkZwSPU1pUUXApvp9s6OFiCF23tsJXcfcjrVK50JJoi0czQ3fO2dFHy+qgdNvqPx61s0UJgU/sf8Ap8FyWB8uFo8Y9Spz+lJqFnJeeSqz+XGsiu67AdwU5AB7HIHNXaKLsCpd2hul8t5CkRGGCcMw9M9h9KLizSS3EcbvAyDEbp1U4wPqPY1boouBB5btaeXI4LlNrMBgE4xnFU59NeTSYrGOZUCoqOxTO4DGfpnFadFFwK13aJdoscrN5YOWQHAcYPDeoqjc6XcSmMRag6RxuHRHjD7SOnPB/PNa9FF7AUY7W6Nu0c99I7lgd8aKhA9O9Nm07z1EMsjG2yCUySXI/vMTnGewrQoouBVtIJLfzA87yxlsoH5KD0z1P41Rj0OP7MkcsrMwYlmAxkEMAPbG4mtiii4GfbaaLa/e4STKFCoTHIJIyc556Cpp7USSmeJvKudhRZMZwCc4x36VaoouBU0+1aysI7cyeYygksRjJJJJx25NVZdHWS5+1CUrchgwdRtC8YPyjg5HHOeK1aKLgZlvpX2S88+3uZF8zmdHG7zW/vc9D244xjjin2drcQWzI1zI5MjMDL87BT0GeOlaFFFwMxdLddKOni5PkmIxZ2DOCMdc+9WrSCWBGWSczAkbcqF2jHTirNFFwCiiikMKKKKACiiigAooooAKKKKACiiigDN164e10i4likMcuAqEYzuJAHX3NOssP++W8mlRMq4fG1jxk9AeKNRs5ruW0KSRrFDKJXVlJLEZxg9sHmrxUMrKejZz+NVohFCxu2n046gyu6yAukaDJ29sepI5qa0vY7wBoUk8tkV1crhSD2B9R3FVdOt7i306KyRxE9uwTcy5DJk4I9yMfQ9qRIptNto7dZlCF3KOV+6vLAHJ59PwoA1qpyX8cd1JbmOUukRmGFyGAPIHqeRxRBLcSvCxVVieIMw2nIY9s5x+lVxGL3UY7qJiIoUkhcMhG87hwM9htP50IDSRt6KwBAYA4PWmTymGFpBG8m0Z2Jjc30zVOO6la8KEgqWdQoHK7cYJ7nP9RTnW/m08BJIY7knlihK4z6ZyDj34oAlsrprqNna3mt8MV2yhcnHfgmori4a11G1RmzFckxgf3XAJB+hAI+uKillurWCJJJYvMIdi6JhflGQoBJ/n2pZomvb2wcoVS3JmfPZipAUH8ST9BQBdluEiYBhKcjPyxs36gUyW6VLOW5CvtjRmwylScDPQ4PanS26ysCZJlI/uSFR+lKIE8hoWLOjAg723Eg+5pAZdle3H2jT1nfeL6BpCOMIwAOBjtgn16CtDUJhbafczsxURxs2R1GAelVIdNkt/Kcyq7WsLRQfIeAcctzycAdMd/WnX9pdX+nRwF4o2YqZcqSCAQSBzxnHvVaAR6SXnggZr6eSaNVMwIAVmK5I6D68VZ1C5MLW0EZxJcybA390AEk/kOPcip7mQwW0kqoHKKWIzjOPeqV7G1w1neomTbSlwo5LIVKnH4HOPakBPcXsdrPFA6Ss0gOwhchiBnbn1PNWYn82JH2sm4A7WGCPrVK6s57qVJVuEURyLJCNnQdGzzzkE+mM0v2qX7d5eRs8zy9mOcbd278+PSgC852oWwWwOg5JqraahHdpA8SSBZkLqWXGMEAg+h56expEuXhtw951aTavlxtk5PHHPNVraCTTdM2lw0m8gMRwis/8AQH9KANaqV7etabdtpcXGRkmIKQvpnJFNjnuZIEaPYWEpRiynDKCQSMEYJHPcUXMN+92jQTW6wDGVeNi2e5GCBn6ihIC4CXQEgqSOR3FVNPumlkubaU7pbaQIW/vKQCp+uDg+4NNgu5GuyrkFCXG0DlNpABP1BzRptuy3F5duCrXUgYKRghVUKP5E/jRYBZdTiWaOJY52dycjyX4UdT06Zx+dN1K5kjuLG2iO03UhUuP4VClj+JwBTo9NUTyzPPOzMQF/esMKOg6+ufzp97afaTBIjBZrd96MRkdCCD+Bo0Aj0q5e4jnSU7nt53hLY+8B0P1wRn3rQrOt7WWz8tIirebK0k7FTyTzxzxzgDOeBWjSYGFcatPHFdEGPzIzL5alCQQmOSc+4qy+oSNfW8KDav2gxOSAd2I93HpyR+VZV7CVkvfMbESrLvkUFghkIIyOvAXJxnqKtFQuqWrb0ZZrppE2sCSvk4z+n8qoDRvr4W1pPKySxrGpJfYCBjvjPNJFdXAtYzLayPPgBwgAGe+MnpTNVH2pV09efNIMvosYOTn64wPqfSoIVhfxCvkNlIbYlgrkjLNgd8Z+U0rALqGovFfwW0dxBEHLbyVLMu0A4xnvULatN/Zklys0AlV2UIUJ6OVHf0GaTUrV7nXrJzLJCFWRI2Q4OcAlv0AwewPrRKJBqDQbZPJ8gtsNztB+bGcjpxmnpYDQ1HUPsAth5LTNcTCFVUgHJyc89sA0q3zpNItzAYI0jMhlZwVxnGP61mXWzUfE1rarMwSzgaYlG53thRz6gZ/On31o6rpWnGR5Y3nLTO5yXCgtgn3IH5UWA2YJTNEJNhQNyA3XFS1zV00EuuQMsjtZXcbROUc7XkXlQMd8ZBx7DtV3WXiu9AvzbybmhR8MjEFXUZ6juCKTQGxRWXaXEBnFxLJ5b3MIKIzEblXktjoPvfliqOmPpc1+9zb3BdkDOcyswA7swJwOvAxx/IsBuW86zoWXqrMhHoQcGpqw9Kglu9HlkkVVN1O86rIpIClsrkZB6AHr3qxb6Y8U6SEW2FOTtjYH8CWP8qLAOuNWit2uMIzx2xUTuDwhPb3IBBP1FGqXs9vbOIISZnIjgO5cM56cZ6DqfYGsJbaWfRzYYJur29d5/VUDkkn0GAAPXIxWpOn/ABUEZuJtq/Z28sA4CHcoyM9yMgn04p2SAtw3k0ibI4GlkicRyEsqgHAyf1zxU00kqzxiIxupDbkLYY8ZGPx4/Gs2yEEb3kkt06qt1uGZMA8KBn1Gak1J44dX0+QRF5HEijauSTtHft3pAKupSm8nBjAiTbGA7AAyHPAbv2B9DUmp3csUMccLpFcSYJZ8FYlyNxJ/T6kVjzwLDKrQKYvKJ5yZFts9XbJILY4AHTJJrW1No4bOSZg0kLx/vGVAwYY6n2+nAzmnYCF9YnzMqWux4omYpISCWBxgEDBByOanv9Qazjs/NeNJJJFEqjJGCDnHfqOKzJJGtmEk8zXDmyLK8EeRkuCuAByAcAHv3q9dvdTJYN9lYNGVuJWJAVcKcrxkk5PQA0OwC3eqMZbRLbcplkKtwrHG1j0z6j9DV+xklmtI3nXZKR8wGME+owTx+Ncnf27x24kt/NMxO7Ih2lELMWYgnPAc4yBkgYrqtNltpLKP7EVa3QbEKnIIHFDAt0UUVAwooooAKKKKACiiigAooooAKKKKACioZ7iKDZ50ipvbaue5wTj8gaowavC01950iJFbvtDc8jaGJP5mmkI1KY6I64dVZfRhmqmo3otLD7ShUjcmC2cYLAE/kaP7RjJJXYyjkMJVwQeQevTHNFgL1FUJNSjhsPtU4VFY4QBwwYk/Lg9OarHWBGsUb7HuCUEmzO3DEglT3wRTsBqhEDlwoDngtjk0+qRv1S1M8sUsfzhChA3Ak4HA6ZyKqS60nnpFChDFpA5cH5Qg5OBkkZIH50WuBqvGkgw6hgDkAjIz60+qWn3ovbeOQxvG7Rq5BU4GewOMH8Ku1L0AKKQ8AnGfasuXVsQzPHbSnymMZ3FQN4xhRzzycfnTSA1aKoWN887GKeLy5UVdxDAqzEZIXnJxQ9+rx3AtUaWSIlMBSVLAZxkfWiwFuWLzVClmC5yQO49KeAAMAYHpVT7egaCOSKZZJjgDyycHGTz6e9XKGAUzYu/ftXfjG7HOPrT6guriO0t3mmOEQZOOp9gPWkBPSMoZSrAEHgg1Q028knQR3iLDdgbzGDkbT0I9cdD71PeXK28Y5HmSErGCpO5sE44+hp2AnVVRQqgBR0A7U6sgatuaFihjiHE5ZWJRzgBAQME5PP4etXNSumtLMyRqrSsypGpONzMQAP1osBYCIrswVQzYywHJ+tPrMfUil/DAYyFaN3cnAIKlRxz7n8qstcSCCKVLd23soZMjcoPGeMj369KALVFZraix1RLVIjsCFpC3BBP3QBnqcE/hU1xdvHYvMsDCX7qRPgFmzgDj1NFgLlFZVzqwjt0eECUmRUYqQVBLBWHXORz2q9bzidSdpRlJBUkEj06UWAesSIhRUAU5yMcHPWmfZLfz0m8mPzY1Kq+0ZUegqvbXs1ykrJAm2OV4+ZCM7SRnp7VLpt0b3Tre6ZPLMqBiuc4z70ATrGiFiqgFjkkDqajt7S3tWkaCGOIytucquNx9TVOPUZZJrhFhGIpTGDhznABzwpHf1qawvGutNjunjwzAnYnPQkYHvxTAsyQxysrOisy5Ck84zwaYbO2PW2hPGPuCqVzqUqXltbQ20jPIS0m4fdQDkjB65IH51bS5Z5xH9nmVSM+YQNo9jznP4UATqioAFULjpgdKZNCsrRMc7o23KR+R/Qmqk+otb2k809vIpiLAADO/HTB98gfWn2l1LNFB5sJ3uuXZMFFYdRnOevHfpRZgXMD0HHSqhshvAVysByXiA4dieST1qJNSUzzI6gDcRCAfmlC43HHoCcdaSx1I3JIeIpmV4w2QB8pI9cknHYUWAumGMzLKVBdVKqfQHrj8qbPbpOgRx+7J+ZR0Yeh9qqXmpC2u2QgGKKPzJmH3lyQFAHvz19KUah5cgWdOHmEcRQg5BHGRnjnI/CjUDQAAGB0FLVC9vWtrq2hVUImDksxIxtAPYe9R/wBpOL23hKxlJd25gW+XAyOoHelYDSAGcgcmmNFG0okKKXA27sc464rN1PVlsZUjITLMg3Mw4ywBGOucHI+hplvrKS3DCV7eGFIgzkyZIYk4A7HgfmadmBsbV9BQyq4IYAg8GqN5frEsSwFXlkwyggkbMjc3HoD/ACqEazFJeRLEVa2MJleUg8ZOFAGO+CefShIDSWNFj2KihP7oGBQEVUCBQEAxtxxiohciW2jntwsqOAwJbblSM55qrc6hNC3lpbLNKcfIkoyAe5JGB/WlYC6kEUbKyRqpVAgIHRfT6VLVO/vFsoVdguCwBywGB3P4d/asy318zpaYECvMU3Fn6KVLMQO2OgyeTTtcDcWNEZmVQGb7xx1psMMUCbIY1jTJO1QAMk5Jot7iG5j3wSLIgOMqcjNS1IBRRRQMKKKKACiiigAooooAKKKKACiiigDL1dzHdaYwRnIuGwq9T+7eqF9a31pYXcgZJVuVke5XpsJU4K+oAABB69eK3ZYI5pIZHBLQsXQ+hwR/Imo72yhv7cw3Cloz2Vip/SqvYRnapbq1hbTlm3RmMAZ+Xl05I7nimJE0V5qaxpKiEqEEcQKkCMDjI/Ditie2jnhETj5AVOBxyCCP1Apv2OD+63/fbf40XAyJhJD4UtFXckiiBcYIYEsoI7EHqO1VnLfap4pUllDXEKhcsGUbScr82Qcjrn61vfYLbyDCI8RlxIQD/ECDn8wKibSrVvNyrkyyCQt5jbgwGAQc5GBTTAoS20iabKFizcvPGzJ5jSYwy4yTnoBzjiqUtpJBdO0kYWWVbpziQj5SQRyO3Oce9dFa2cNoXMW/dIQWZ3LE44HJNPktoZZklkQM6KVUnnAOM8fhQmBnaID/AGfEmSrGCPkTFz93rg/d/r+FaQhYD/XSH8v8KVIYoyWjjRCRglQBxUlS2BW8grKZRJIz7SoVm+X246fjXKDf9lEJeSWRt+RzhpDOBkA8Z6/hmu0qH7NFmM7AAhLKBwAT3x68n86aYHP2CuNWhLK4AuZxlgoH3fbn+lTahcCO5v4YyYwlsZA6uw/eYJwOcZwAcdea1VsLdLoXKoRICxHzHGWxk4zjJxSvY20tvJDLEskchLOHGdxPc07gQWULGSKaSFgRHw7TFjk4yMdOcZzVvyW3MfOk55xxgfpVSHR7WCZZYzcAp91TO5Uf8BJxWjSbArSW3mrtaeYDIPyttPX1FD2qSzrLMTJsOUU/dU+uO59+3arNFK4GFZWEN9pYEm5HSeUpJGxV0O9uQR/+qrWo27zGzRCzeTKHZm3HI2sOo6nJFXba3jtYfLiGF3M2M9yST+pqam2By9vavNFeKoHF2W4VyflKngZxnjvV7VUF1HYXDq6BLiMrG4wQxYDJHqBnH1rUgt47fzPLGPMcyN7sev8AKkubaO6jVJN2FYONpwcg5FFwOcncfYNWBZc+ZOMErnv6gn9a0NXEa6PCWYq48sIAxGfmUkDHXgGro0y3EMkX7zZIWLr5jYbPXPPepIrOCIJtTLJnaXJYqD1AJ5xTuBi3NsVv7SREkzPcs5ImBydjYxx0AAx6CrV/BM+mxq0IMscgCM0+Co6byxxkgE8c/jU8uiafK+8wlGzn93IyDP0BFTRabZxQLCIFdFbeBJlzu9cnPNDYGFqaGG2jMSiOAGONDE4IJ3jPJIyMDrgEHPOK3bIJumdLYQh23b8qfM468E/rTxaQiYSspdwCFLHO36DoKbFYW8UTxRIY0dy5VWK8n0weB7UrgZumRB4btjZxyn7VN8zEZPzn1FWNCby/DliwRmIgX5VGT0q0lhbxAhEZQSWIEjDJJyT1pINOtbdWEEZi3KFO1j0HTHPH4UXAyrXD3V/8uSJyzDZuK5AxnDDB4PFWdDeVNNig8hgUTIcsNrHJ4BBNacMEcEYjiRUQdlGKZDawwTSyxJtaYguB0JHfHr/hRcDEigca5e+bieQxxEsYd+373A5GBx079au6KoCX4K7f9JbgLt/hXt2rQW3jWeWYA75VVWOeoGcfzNMtbOK0ieOINh3LtvYsST6k0XAxreGO5ubqOLfIkdyJE2zYHCKB1zkA5/Ee1S6EkwtIHCOUJdWzLwPmPIXHXj+daUunWk0KRPAmyMYTaNu0exGMfhUNvo1lbyrJHG+5eQGlZgD9CcU7gZkFq6RXCRW0azOSiJ5ocogJI6nIzyc5yCRxxT9HMcwY/Z2uCt07K7MhKDJAbGfY9B3OK1v7PtxF5UcYijPVI/lDfXFKbG2M0EoiVXgGIyoxgY6cdvai4GDqsGyXUkjO6e4jhO44zwzEn6AL09qqLe3TtESGBDqQ3lx8HMXPAz/G35iuqezged5mQmR08skk/d56fmaZJp1rIkSGIBY2DAKSORjGfXoOvoKLgVtVwpimlRlWNwqSpKVI3YHIA6ZwO/rVKS2uptRmtCzuixJIEe5YAksepAzj5RxXQkAjnkVVtrG3tZ5poUKyTY3EsT06Yz06nilcDH8Rqu+F7qNGgVw5eRjtULyQABwxIAHOeuKhLRiXTrYAL9uMcjAybiNh3YJ75AAH0ront43kEjruYfd3chfcDsagbSrJraS3a3UxuQW7Ekcg57YPTHSmpAQXYc61BskVD9mkyWXP8S+4qpp8UkGixyoV8l7QmXPUttGCD6YyPyrXNpAXRmj3MibFyScKcZH6VFcaZaXFmlpJEfITACqxXj0yOcdj60kwMyUsljoIWIzEYHl5A3fuW454/OqtrCwvpdkKXcMDRI0KvkxkZwcn7xXI4OOORXRy2kE3leZGD5JynJG3gjjHsTSCytxnCEZ6/Mef1p3QGKBIfC1uRGZ18rLIWOGJ6Z4yRk5Pt1qlBcW1jpDXsARltWEKlZNwclQpKg4xk4PvjNdNHY28drHbKp8mMbQhJwR7+tAsbYTNN5SlyMdOMYxjH0ougDToRb6dbQggiONVyOhwKtVWs7OCyh8m3QpHkkLuJA+meg9qs1LAKKKKQwooooAKKKKACiiigAooooAKKKKACimsyopZiAoGST2qnBq2n3O/yLuKXy13NtbOB6mna4i9RVNdTs2YKJ1JJwBg81Vn1HztRmsbeVYmhiMksrLkKT0H8yfpQkBrUVm2mpRzCKSSVIo58+QrcFxjO78QCQPSrkVzDPAJ4pFeI5O8HjjrRYCaiq0d7ayrC0c8bifIjIYHfjrj16UljcfaEm6FopWjbHqD/gRRYC1RWTLcN9ucI88TKNjKQNp6EOM8d8fjz0FZ1o7JKu28kLRxSDAC8kyckEnHUY5/DinygdPRVDUlleO32CT/AFybwhIO3nOcdqqyFZ5rVrUXB8u62yHLYGAQQcnpnHtRYDZoprMFBLEAe5oVlcZUhh6g5qRjqKKKACiq15eRWcQeQjc7BETIBZicACmNdPEiCaJVnkcpHGr53d85xxwCTTsIuUU3cBnJAx1p1IYUUhIAyeBRkZx3oAWiq8lwsVzHFIMCXhH7Fhk4/IHH0NSyFwpMahm9CcA0WEPornJZZ/st+uG8oXQQr5pyuSuQpxkA5/DJx2rbT7Q0bBzHEwb5SpLDHvnHNOwFiiuet55r7U5LmOVngtswxlIyVZjjcSN3OOAPxq/ZXBkt5L6W4b7OVPyvGF2bSQT1PoaLWA0qKZFIksSSRkMjgMpHcGnEhRknAHWkMWisVbqYSi8jkupreQkLH5a7X4ONn8QPuTg1oWV212jsbae32nbiUKCfcYJp2EWqKKKQwoorF1a7MWpWcP2qSCMq8kuwA5UAAdiepH600riNqiq9rGyRkmaSUOdw8zGVGBxwKsUmAUVQ1GQ/JbRSzJNJkgQhS+B15bgDpyarw6jNHshktbq5bdsMyooGc455HI74GKdgNeiiikMKQkAc0tQXcy21nNO/3YkZz9AM0CHC5gJws0ZPoHBqWsTQ7Jo7CCO5s4l2oJd/BJcksewxgmtum0AUUUUhhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAV72R4rSVkga4YLxEMfN7c1U0/zbiKb7RazWrNgFmYBm+m0nAHbmtOincRTWwVWB+0XRx2MzYNYc8Mtzo+t3KkhryQqhH/ADzXCg/iAx/GujnhjnQLIu4AhgM45FOEaCPy9o2Y27ccY9KaYGLrNtPcWqwWtqT9jkjlTJGJApHyrz6ZHOK0orovdvbmFlKRq5fjaCSflz68VaAAGBwBUU9vFcoFlQOoYMASeo70XAxtKRrSweW5TbFBLM0IAyWBZiCPqDgfX3qTSxLp9tbpcRO1zfTvJIF6Rlssc+wAA471sNGjFSyglOV9qfii4HO6ml1Jc32UaWNBAIl2YBzICwz36DJ7VVvdKks4GYkSGRlQL5W7JZgzYIHA3HjPYH2rrKKOYDL1CK4ubu38gYS2PnMCSA7YIC5/Ek/hWbb3EMQuFv7XUIme4eQKqOVwTkcpkH866aii4GZqc8BskE9rJcRykfJ5DSY75ZQO3vRazW1pDFFBbtDFhWI2BNm4kDK8EEntjitOq8trHLMsjEjGMr2bByM/Q0JgJdxNKihY1fBzzIyfqAaZZwPE7Folj4xlZmfP4EDFXKKVwMu+iW61iwiZAyw7p2JAODjao/Mk/hSXysNf0yU/6rbKmewYgEfoDV23tY7cER7iT1LEk+w57dakmiSZNsgyM5+h9adwMSeBJ9USc2Uht51aCcMh+Yg5ViPQYIBPqK0U1CMwu5jkVUQSABdxZDnBAHPbp1q729arQ2cUIYYLggKA3ICgkgD2GaL3Ai1KKO90a4UqHSSFioI6nHFVrWbyIILmWBhPJAoYEAMFUZJOe4JPHvWhLaxTSxSOCTFkKAxC846jOD070XNslzjcWXGRwcEg9R9DQBQ1wNNFYLCcu11GykegOSfyBq01zb3EDsRJiNypXDKxYdgOCc/kasCCMSCQKNyrtB9B7U9UVBhFCjrgUXA5+408x6RM7xv501wshQMx25dcDg84AGT9a2BY26iUKmPNIMnzHLcY559KtUUrgYVpaBWv5GRFUXDEAwbjgAdO5H0FT6Lvi0CIiJmYKzLHjaWBJIGD0yMda1qKL3AjiYvCjMhjYgEqcZX24pLmEXFtLCxIWRChI6gEYqWo5UZ0IWRoz/eUDP6gikBQNnei0SOOeFZIlCITGSvAwSRkHJHHB4zVuzjnjgC3LxvIM8xoVUD0AJP86jWFmZlXUJiy/eA2ZH4baliheN8tcSyDH3WC4/QCquBKXUdWUexNKCCMjkVSnsmllL7bQ5x9+Dc355qdYc24iLbMDGYhtH4DtS0AnrPis5Rq1xeSyRskkaxogU5UAknnPOSfTsKsxWwifd5szcdHckVFLH5RzJqEsYY8bigH6rTQDprgx3cUK+Xhx1J5B9Me46fQ1aqkkXnZMeoSvjuvlnH5LUjzGKeGEo77wfn4wMeo6/kMUmgIprST7f8Aa4JEVmiETb1J4BJyMH3P6VHHbX0d4G+0QfZhwFMZ34+ucZJ68VPLEyZd76WJc99gA/NaX7LL/wA/tx+Sf/E09QLJIHJIApA6twGB+hqKWEvbmIlXOMZlUMD9QMVFbWhgl3lbYDGMxw7D+eTSAuVXvbSK+t2gnDGNvvBWK5HpkYNElqJHLGadc9lkIFOeBjGqLPLHt/iGCT9cg0AEuyO2KtJsXG0MWwR2HNMsllFshnJ8wqNwPYgAH88Z/GoP3Z4/tRifTdH1/wC+asxQSI+WuZpB/dYLj9FB/WmBPRRRUjCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqve3KWdnNcOCViQsQOpxVimSxJNE0cqhkcFWU9CDQhGQlpLDIk0aWsV3IhYlY8BeOjEHLDOOT6Zq1pdxPeW8dzJsEciAhFByrDIbJzyM+1S/YLcqFZWbDBss7E8dOc9PapLe2itlYRLtDMXIyTyTk/SquBPRRRUjCsXVw0+qafbxxJMYy1wyscDCjaOcHu36VtVVWyhW+a8Abz2UIWLnG0cgYzimhD7WMJGHMSRyuAZAowM4qbAznvVSRJHvo/lmWNBnergKT6EZyfyq5QwMq723981oY4WSBA8jSoHALE4AB9geagt7m5gk+yJ5QU2xkg+UnBDYAPPIwR6VpyWcEsxldTvICsQxAYDoCB16nrUcNsz3C3VzHGtwisibGJAUnPU464HancC4udo3Yz3xS0UVIwpkjrHGzscKoLH6Cn1BdW0d3bvBOGMbjDAMVyO/IoAyNCt3ksozPaRCO43XBY4JJZtwGMcYBHr0reqAp5FoY4UZ9ibUXdycDgZJ/maSzjaO3UP5m48kSNuI9s5NU9RFiiiipGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAh4HrVVL6J4FmVZGRgTkITjBwc/iKsOCykBihP8AEMZH51hw3Uz21irTs7OJfMzjLYVsZ9KpIRq294tyy+VHLsZA6yFSFIPQc85q1Wboyz/2Zal3TyzboFCqcg4HJJP9KuWySx26JcS+dKB8z7Qu4/Sk0BNRRRSGFFZovn86+VniRbZwq7hyw2K3r6k1CdTZ7a1kikh3TtGTH1ZVYgE8H3607CNiiqV3d+RNCqhGDttkBcBlB/i+g/rVfTNUjm083FzcQj55DnIACBiB39AKLAatFMR1kQOjBlYAgjoRT6QworPbUGF3PbxWssrQqpZlKgHOcDk9eKkt7tp7qaIQ7Vh2gszc5Kg4xj39adhFyiiikMKKKrXVyIDGir5k0pIRAcZwMnnsAKEriLNFVo7kSTeUEIdVDSDP3CegPqetWaLAFFFQSTrFNHG4IEpwrds4zj8hQMnoqraXLTyTo8YR4XCnDbgcgEHoOxq1Q1YQUVRuNRht5XRgxWMKZXGMRhjxmr1FgCiiigYUUUUAFFQXUvkRb98UaggFpDgeg5+uKyTrj7iN1txci3++emAd305p2uI3aKpW1yZY5ZGuLd0DbVMfRSOoJJ5OfpVS71GaLS0kxi4ZowTGpdDlwDg4weDRYDYoqvBdxXEs0ce/fCQHDKVxkZHWq6XM9xdXSwBBBEuxXP8AFJ39sDgfXNFgNCiq9ncpd26yKfmHyuO6sOoP0NZZ1eUwM6y2wcXPk+Xg7seZtz16456UWA3KKzV1AzX1tHCMRyNMj7hzlDjj2zmi41M27Qh4CRLL5QIccdST+ABosBpUVltqaDVkt94MTRbuEOdxbA/CtShqwBRRRSGFFQy3CxOqsshLf3ULD9KyU1S5kmu1hTzDb3ATYYmB2FVJ5HQ8kjI9venYRuUVn39/9n0s3AHlyOAsayDBDscKCPqRVcajK0pjVoQ0Enly73C7/lySB25Ix+NOwGxRVCK+M+kyXiIEIVyATkfKSO3bioIry6ksEmGTI0QfAgJBJGcdfWiwGtRVbT5mns4nl4mCgSDGMNgEirNS9ACiiigYUUUUAFFFFABRRRQAUUUUAFFFFABWYmjW0QRYmkjVCxUKR1bgkkjnOa06KadhFS3shbrGqzTFI02KjMMYxjn3461LbW6WtvHDFu2IMDcxY/mamoovcAooopDMBgZLjV4Y0VppJgqs2MJmJRu59PTvTJIpLRYbVlRoIp4BDMMBmG4AqQO4wOe4I71uC3hEjuIk3OQWOBknGP6Ch7eF8bokO1gw+UcEd6q4itqU7RwmK2UPdTZWNfQnqx9h1P5VlalDLpukTQRSxvai2MQVuHDnABHqCc5zzmugWNBI0gUB2wC3c1FNZWtxNHNNbxSSRHcjMoJU+xoTAmiUJEiD+EAU4nAJxnHaloqRmPplm0kkt5cpNFPJOz7GYgBQNqggHB4wfrSxlhd6rthaYmSNSikAkFFzyfY1r1EsESzNMI0ErDBcLyaq4jK0+A6ZbytJbSM8TeWjKwYmMnIAyegzj8Km1WNmmsZYVLzRTg4DYO0ghv05/CtMgN1ANRLBEk7zrGolkADPjk46UXAigKwS/ZVjYAKX38bTknI69c+1V1iW4195yin7NCEViOdzHJwfYAfnWiUVt2VB3DB9xTYYY7eMRxKFQdAKLgZtuXtrzUyY2keRlljUEAuu0DAyexBFRWNqbBrmV7V2EZMkOGBKqwBKDJ65z6D3rZKqWDEAkdD6UpAYYIBB9aLgZmsIZ7GKSJGaZJI5I0BwxwwJ/TNM1G3JW2hjGJZbpJmwegByx/IY+prS8iL7R9o8tfO27N/fHXFP2ru3YGcYz7UXAzrdWa51VU4cyKBzj/lmuOe1Msba9juVeZyUHUGVm/QkitGGCKAMIY0j3HLbVAyfwqWhsDBvdPnlfUoo13Lf7MP2TAAbP4DIrdAwAPSlopN3AKKKKQwooooAztbOLBTjOJouP+BrVD+zbzzifPCAyG6JZchZOQB9ORn6e9bksSTKFkUMoYMAfUHI/WnMqupVgGU9Qehqk7CMXTZY10q5e78vJuZAQPmBYsRgdzzwO9R2bK1nZW8mEWzVWlj6NvUcLt64B598DGa2re2htoRFBEkca5wqjAHOf5024srW6x9ptoZiOhdA386LgUdJZbpb2cFlFzNuUHKttChQcHkdKasMR1MRws0dtbxkOBIQpdiMDr1ABz9RV620+ztN/wBmtood4wxRQpP5U6S0t5bZrd4UaFuChHBouBmaBZQ/ZUvgGFxLvy+4/MCxwTzzgYwTVW6MsEt/dw3ByojgjbYuGbcc4GOcFh07g+ldEsSJGI0UKijaFAwAKie0t5PK3wxt5JDR/L90+oouBkW0TwalZJKAGMl03UdCwIJ/AilmR21uC9WIm2Ym3wM5JIP7wegGAufQk+la32S3F59q8pPtG0p5mOcelWKLgY1kjxatFFJN58iWhVn9fnHX3pviSbbYSG3lb7Zb4nVUb5goPJI7ggEc8VqR2lvFcSTxwos0gAd1UAtipSq5JwMkY6dqLgU7GW0VEigmy04MqhnLMw4yRk5xyOnFZumI0s91a75cWt6XDbzwuAwXPcckYPb8K1p7Xe3mROIpwuxZNoO1c5IAPHOKlhiWFCq9Scsx6sfU0AUdVaKdVsmimklcb1MeV2YPDF+i4P1PtWKUcS6jcSq01ubjbdRwEkldikEY5IBzkDBIJ+ldYQCCCODUNta29pGyW0SRIzFiFGASepoTAy9Ra2vNJguYGDxLJGYyOg+dRnnuBmsW4lvIry6eF5QJmMqqshXAKykcDuQqn8AK7CaCKaLy5UVkyDtPTg5H8qXyow5fYu4gAnHUD/8AWaakBlaN50uny5YMxmYESkuMccdaz7uALpkzIi2skcgiC5cdGAyo3cgjpgV0kEEVvH5cEaxpknaowMnkmmz2lvctG08McjRtuQsoO0+tLmAomzt7PTrlL1oktmbczJuTHI6nJOc981qDoMUEBhggEH1paTdwCiiikMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKp6jcyW8IMLQrIxwvmk4/ADkn2FCVxFyis6LUreOBGvbi2t5DkHMoCsR3BOOORV9GWRA6EMrDIIPBp2AdRRRSGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRTWbajHjgZ5OKzLXUZDI5uZLUQ4LB43ICgepPUY7jimkI1aKgt7u2ugTbTxThTgmNw2Prip6QwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAK19eRWFq9xPv8tMZ2qWPX0FJDeLLMIvKmjYqWBdCBgYHX15qhrrfaJrHTkcK08od+hwifMeD6kKK0rWOSGHbNL5shZiXIAzk5Ax7Dj8Kq2gieio5TKFzCqO3ozbR+YBqlpL3DWw82OMLuf5hIWOdx7ED+dKwE15fRWckCSLIWmbYgRC2TgnH5Cn29ytwZFVJEaMgEOhXtnj1rKuxJf6+IYJ/LNlAXLABsO+QOD6AH862Y18uNEZssABk9+KYElZc8cqa0LkwvNGINkezHysWyc5PGRjn2q8zTefGqopiIO9ieQeMYGOe9Md7sMQkMJUdCZSCR9Np/nSWgGbPuSYRSabLcbvmeREUqSTnGSQQB3OOa2gMAAcAVW33v/PCD/v8f/iakLSfZ2LgI+D/AKs78fTIGae4E1QXFxHbqC5OWbaqjksfQD1qpDLMZkDSXJBPO6AAfnjiotTVhrGkzNxCryKx7Bip2/1H40JAaNvPHcQiSJsryPoQcEH0OamrI0FW2X8n/LOW7kaP0K8DI/EGtekwCiiikMKKKKACkJwKWqeqXi2Gm3F02P3aErnuccD88UJCIYdXgmj8xIrgx7zHu8o43A4P6960qytFsJrK1hWWcyKIgNu0ABjkscjrkmtSmwFprNtUtgnHYCs1pLz+1VAhh/1JOPOOPvD/AGafrd2bLSZ5QQJSuyPnq7cAfmaLagFvq0FxFFLFFcGKVtquYjjOcc+gz3rRrO0qxewgWN5/MjjjVEBUALjqePXj8quTNIIHa3VXkCnYrNgE9smm0BU1mCW502SKEbixXcoOCyhgWAPqQCKiuncx+d9hklVBsSIKu45xkkEgYGBxnmrztcBF8uONmI+YM5GPpwc0zfe/88IP+/x/+JouA3TsG3LC2e2LMcq4UMT6nBI/WrlQRNclgJYolXHVZCx/LaP51XupJVmISS4VcdEh3D88UtwLxIAJPAqrb38Fw4SNjll3rkY3rnBI9R0/MVFcrNPotyiFzM8TqpddrZIOOKzbbEt5oPkciK2cyY/hG1VA/P8AkaaQHRUUUVIwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCJreFphK0MZlXo5UFh+NQ31s10sYUoNjBwWGc4PT6EZFW6KdxCAYGBwKAAowoAHtS0UhkSW8McjSJDGsjfeZVAJ+pqGa3aa8id0iaKPkbhlg3qP0q3RTuIKz9RmZdkEMzRzyZKiNA7kDqQDwB05NaFZ0ttOuqm7hWOQPCIsOxBTBJyOD1z046ChAR22pxIPIupibhFZj+7I3Bepxjrz0H4VoxSLLEkiZKuAwyCODWXJY3jy28uYS9vMWU5Pzqww2eODzwOeg5rYpsApjokiFXVXU/wsMg0+ipGIoCqFUAAdAKWiigAooooAKKKKACo5oYp1CzRpIvXDrkfrUlFAET7I4CPLLIBjYozx6YqKxtzbWyI2C4UAkeg6D8KtUU7iE2jduwM9M1HNBDOAJokkA5AdQ2PzqWikMguo3e2aOHywxGBvGVx9KdbxLBAkaqqhRjaowBUtFFxEU8qQQvLI6oiKSWboBWRHftZEzX1zKbdwSPMg27enI25OOe/PSr+q2jXti0MZUNuVgG6NtYHB+uMVT1JDc21xbSvGlzcQMkMIbPUYJ6c845xxVKwGmk8bzPEpJdACRg9DnHP4GpqgtYnjhXzSDKVG7HTIFT0mAVGkccZYoiqWOWwACfrUlFIYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUySRIkLSOqKO7HApwORkUALRRRQAUUUE4FABRUAu7YkBbiIk8YDg1PQAUUUwSIZCgdS4GSoIyPwoAfRRRQAUUUUAFFVLy9Sz8kPHJIZnEahAD8xHHU+1SQTmYuphliK4++Bz9CCadhE9N2ru3YG4DGcU6ikMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiobd5JIg00YifnKBg2OfWgCjebby/Nl5cTLFGJZGlQOBkkAAHjPBOT/Wo4Y75UgjtZ4IoQPuGIsduTyDuGOMADBq5PBaSzeZIyiTG04crkZ6EA8jJ7+tRGysDefai583IP+vbbkcfdzj9KoRo0VHJKEi3qrSDsEGSaZDceaxHkypju64FTYCeoriZbe3lmfhY0LH6AZpj3lrG5SS4hVh1VnAI/Wm3cNte2phuGDQyDkByu4fUHpTSAzdCtZBYQLc2sKqy+cWyCS7Nu6Y4xmtyqrvEtuY0kzhcDEnP1yTmiyJMAEj7pf4vmDfjTeoE00iwQSTPwkalifYcmsVIHkWG+RLeG5m+dT5fKAgn5mB+bgjOe9bcmzYRIV2ng7uhqi1jYPbmEsdhAGPOYEAcgA5yB7ULQCWwW7EbG7mjlJPylIymB7gk1cqrZw29tF5Nu2R1w0hcn8SSadJcmN9vkTv7qmRSeoFiiovORYfNkPlLjJ3/Lj60kV1bytsinikbHRXBNKwGTesLzxBa2qTmM20bzErgkMcKByCOhY1qIUgjSKWYF1TJLkAtjqakM0X/PRB/wIVVm2T3MZZ1CRc53DDZGCKoC9RTVYMAVIIPcGnVIwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAhmSR9nlymLa4ZsKDuA6rz0z60FJDciTzT5W3b5e0dc9c9fwqaii4ilei3gUyGyNw7H7scQZj+f9TToIrSeFZEto9rDIDRgEexGOKp3cgbVTHdlhbJEGjTnEjknPHcjAwPeqkix/bLcbrjy3L29wAzYBI3KB7gjGR69atbAbrQRtEIyuEHZSVx+VNhtYoGLRh84xy7N/M1KoCqAO3rTqm4CFQTyBTJIY5APMiR8dAyg/wA6kqnqd2LHTp7huqISo9WxwPzoQFS3uLW5jEkWmOYy+zJjTqG2k9c4yOtaSQRREtHEiMR1VQKoaNZGzsbfNy8iiEDacbQTySMAdSa0Ipop1LQyLIoOMqcgU2BDBE8lsq3gSV8kklAPpxkiq0T2ctyYPsLIcfK7wgK+PQ/44qzqMk0Wn3Elsu6ZY2KLjOTjjis77NBcWpWGSRyIj5kodgWYqR1B65J6dOlC1A1o7eGNt0cMaN0yqgGmS2kMrl3Dk+0jAfkDVTRt09lbXb+Zue3RSGJ5wM5IPfJPNadJ6AMRAkYQZwBjkk/qacAB0ApaKQzOvntLQxeZZiVppAihI1JLEE85I9DUkEdvKzK1gIiv9+NcHPoQTmqN6ReeILW2SZozbRvMSoBIY4UDkEdCxrTV47WKKOaYbjhQzsAXPT8SapiJkRY12oqqo7KMAU6iipGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAyVWaJlR9jEEBsZx+FNt4zFCqM24jq2MZqWigAqCeDzmjJkkVUbJVWwH46H1FT0UAIBgYFLRRQAUUUUAFV5IXe4jk8wBE6ptzk+uasUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/2Q==" alt=""></p>
+<p>具体来说, 二元函数的求导代码是这样写的:</p>
+<ol>
+<li>把等号右边的式子全移到左边</li>
+<li>分别对式子求 x 和 y 的偏导</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="n">syms</span> <span class="n">x</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span> <span class="n">x</span>^<span class="mi">2</span><span class="o">+</span><span class="n">y</span>^<span class="mi">2</span><span class="o">-</span><span class="mi">4</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dx</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">dy</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">ans</span> <span class="p">=</span> <span class="o">-</span> <span class="n">dy</span><span class="o">/</span><span class="n">dx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="方法2-用solve硬解">方法2: 用solve硬解</h2>
+<p>如果你不知道公式, 还可以用solve函数强解隐函数导数, 具体做法如下:</p>
+<ol>
+<li>把y写成y(x)让matlab把其当做与x相关的导数</li>
+<li>直接对式<code>x^2+y(x)^2=5</code>求导可得到这样的结果: <code>2*x + 2*y(x)*diff(y(x), x) = 0</code></li>
+<li>用变量<code>dydx</code>来代替原有的<code>diff(y(x), x)</code></li>
+<li>用solve函数解<code>dydx</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="n">syms</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="p">=</span> <span class="n">str2sym</span><span class="p">(</span><span class="s">&#39;x^2+y(x)^2=5&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dgdx</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dgdx1</span> <span class="p">=</span> <span class="n">str2sym</span><span class="p">(</span><span class="s">&#39;2*x + 2*y(x)*dydx = 0&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">solve</span><span class="p">(</span><span class="n">dgdx1</span><span class="p">,</span><span class="n">str2sym</span><span class="p">(</span><span class="s">&#39;dydx&#39;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="如何用matlab求隐式函数的二阶导数">如何用matlab求隐式函数的二阶导数</h1>
+<h2 id="方法1-链式法则">方法1: 链式法则</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="n">syms</span> <span class="n">x</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">+</span> <span class="n">y</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dfx</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">dfy</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">% 一阶隐式导</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">dfx</span><span class="o">/</span><span class="n">dfy</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">f1</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dydx</span> <span class="p">=</span> <span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">% 二阶隐式导</span>
+</span></span><span class="line"><span class="cl"><span class="n">d2ydx2</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">dydx</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">diff</span><span class="p">(</span><span class="n">dydx</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">dydx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="方法2-用solve硬解-1">方法2: 用solve硬解</h2>
+<p>如果不知道公式也一样可以用solve函数硬解, 不过要稍麻烦一点.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="n">syms</span> <span class="n">x</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">s1</span> <span class="p">=</span> <span class="n">str2sym</span><span class="p">(</span><span class="s">&#39;x^2+y^2=5&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">m1</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">syms</span> <span class="n">dydx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">s2</span> <span class="p">=</span> <span class="n">subs</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">dydx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="p">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">dydx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">% 再求导后用一阶导替换diff(y)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s4</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ans</span> <span class="p">=</span> <span class="n">subs</span><span class="p">(</span><span class="n">s4</span><span class="p">,</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">s3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">JiangOil</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2022-05-23
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/matlab/">matlab</a>
+          <a href="/tags/math/">math</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/b0002_hdoj6703/">
+            <span class="next-text nav-default">HDOJ 6703 Array</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'jiangoil';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="http://coebonobo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+  
+  
+  <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+  <script>LA.init({id: "JhKWaWK3fNNzjciL",ck: "JhKWaWK3fNNzjciL",autoTrack:true})</script>
+  <a target="_blank" title="51la网站统计" href="https://v6.51.la/land/JhKWaWK3fNNzjciL"><img src="https://sdk.51.la/icon/1-5.png"></a>
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>JiangOil</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

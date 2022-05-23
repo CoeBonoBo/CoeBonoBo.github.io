@@ -8,14 +8,63 @@
   </url>
   
   <url>
-    <loc>http://coebonobo.github.io/categories/acm/</loc>
-    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
+    <loc>http://coebonobo.github.io/categories/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://coebonobo.github.io/categories/</loc>
+    <loc>http://coebonobo.github.io/tags/math/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/categories/math/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/tags/matlab/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/post/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/tags/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/post/b0003_%E9%9A%90%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/</loc>
+    <lastmod>2022-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://coebonobo.github.io/categories/acm/</loc>
     <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,27 +79,6 @@
   
   <url>
     <loc>http://coebonobo.github.io/post/b0002_hdoj6703/</loc>
-    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://coebonobo.github.io/post/</loc>
-    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://coebonobo.github.io/tags/</loc>
-    <lastmod>2022-04-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://coebonobo.github.io/</loc>
     <lastmod>2022-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
